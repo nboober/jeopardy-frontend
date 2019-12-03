@@ -4,11 +4,15 @@ import Card from './Card'
 let Game = (props) => {
     console.log(props)
     return (
-        <div>
-            <h3>game cards here
-            </h3>
+        <div className="container">
+            
                     {props.questions.map(question => {
-                       return <Card question={question} key={question.correct_answer} />
+                       return <Card 
+                                cardSide={props.cardSide} 
+                                question={question} 
+                                key={question.question} 
+                                flipCard={props.flipCard}
+                                />
                     })}
 
         </div>

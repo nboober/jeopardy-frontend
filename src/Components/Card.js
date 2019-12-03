@@ -2,13 +2,22 @@ import React from 'react';
 import CardFront from './CardFront'
 import CardBack from './CardBack';
 
+
 let Card = (props) => {
     return (
         <div>
-              <CardFront 
-       category={props.question.category} 
-       value={props.question.difficulty}/>
-        <CardBack question={props.question.question}/>
+            {props.cardSide.includes(props.question) ? (
+                <CardBack 
+                    question={props.question.question}
+                />
+                ) : (
+                    <CardFront 
+                        obj={props.question}
+                        flipCard = {props.flipCard}
+                        category={props.question.category} 
+                        value={props.question.difficulty}/>
+            )}
+
         </div>
      
     )
