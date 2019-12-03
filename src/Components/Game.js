@@ -5,6 +5,8 @@ let Game = (props) => {
     console.log(props)
     return (
         <div className="container">
+
+            <div className="row">
             
                     {props.questions.map(question => {
                        return <Card 
@@ -14,6 +16,8 @@ let Game = (props) => {
                                 flipCard={props.flipCard}
                                 />
                     })}
+
+            </div>
 
         </div>
     )
