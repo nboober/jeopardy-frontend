@@ -54,7 +54,7 @@ componentDidMount(){
     event.preventDefault()
     let correctAnswer = this.state.currentQ.correct_answer.toLowerCase()
     let userAnswer = this.state.userAnswer.toLowerCase()
-    if(correctAnswer === userAnswer){
+    if(correctAnswer.includes(userAnswer)){
       alert("You are Correct!")
     }else{
       alert("Ha You Dumbass!")
