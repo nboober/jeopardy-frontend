@@ -21,7 +21,7 @@ class App extends React.Component {
 
 
 componentDidMount(){
-  fetch('https://opentdb.com/api.php?amount=50')
+  fetch('https://opentdb.com/api.php?amount=25')
   .then(questionData => questionData.json())
   .then(questionArray => {
     this.setState({
