@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import Game from './Components/Game'
+import Game from './Containers/Game'
 import User from './Components/User'
+import LoginForm from './Components/LoginForm';
 
 class App extends React.Component {
 
   constructor(){
     super()
     this.state={
-      questionsArray: []
+      questionsArray: [],
+      user: false
     }
   }
 
@@ -22,15 +24,33 @@ componentDidMount(){
     })
   })
   }
+
+  login = (event) => {
+    event.preventDefault()
+    console.log('logging in')
+    this.setState({
+      user: true
+    })
+    // get info from input form
+    // update state so user is current user
+    // render game component
+  }
  
   render(){
-    return (
-      <div>
-        <h1>Jeopardy!</h1>
+    let login = this.state.user
+    if (login === false) {
+      return  <LoginForm login={this.login}/>
+    }else{
+      return (
+        <div>
+          <h1>Jeopardy!</h1>
           <Game questions={this.state.questionsArray}/>
           <User/>
-      </div>
-      );
+        </div>
+        );
+    }
+
+   
   }
  
 }
