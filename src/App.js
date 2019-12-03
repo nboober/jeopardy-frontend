@@ -9,56 +9,25 @@ class App extends React.Component {
     super()
     this.state={
       response: [],
-      cat1: [],
-      cat2: [],
-      cat3: [],
-      cat4: [],
-      cat5: [],
     }
   }
 
 
 componentDidMount(){
-  let offset = Math.floor(Math.random()*100 + 1)
-  console.log(offset)
-  fetch(`http://jservice.io/api/categories?count=5&offset=${offset}`)
-  .then(res=>res.json())
-  .then(cat => {
-   let ids = cat.map(c=> c.id)
-   ids.map(id => {
-     fetch(`http://jservice.io/api/clues?category=${id}`)
-     .then(res=>res.json())
-     .then(cat => {
-       this.setState({
-       response: [...this.state.response, cat]
-       })
-      this.setCategories()
-    }
-   )
-  })})
+ fetch('https://opentdb.com/api.php?amount=50')
+ .then(res=>res.json())
+ .then(q => this.setState({
+   response: q.results
+ }))
 }
 
-setCategories = () => {
-  this.setState({
-    cat1: this.state.response[0],
-    cat2: this.state.response[1],
-    cat3: this.state.response[2],
-    cat4: this.state.response[3],
-    cat5: this.state.response[4]
-  })
-}
+
  
   render(){
     return (
       <div>
         <h1>Jeopardy!</h1>
-          <Game 
-          cat1={this.state.cat1} 
-          cat2={this.state.cat2} 
-          cat3={this.state.cat3} 
-          cat4={this.state.cat4} 
-          cat5={this.state.cat5}
-          />
+         <Game qData={this.state.response} />
           <User/>
       </div>
       );
