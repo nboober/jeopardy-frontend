@@ -71,7 +71,7 @@ componentDidMount(){
       return  <LoginForm login={this.login} className="container" style={{textAlign: "center"}}/>
     }else{
       return (
-        <div>
+        <div style={{textAlign: "center"}}>
           <h1>Jeopardy!</h1>
           <AnswerInput submitAnswer={this.submitAnswer} answer={this.answer} userAnswer={this.state.userAnswer}/>
           <Game questions={this.state.questionsArray} flipCard={this.flipCard} cardSide={this.state.showBack}/>

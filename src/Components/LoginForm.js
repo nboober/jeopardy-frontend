@@ -2,7 +2,7 @@ import React from 'react';
 
 let LoginForm = (props) => {
     return (
-        <div>
+        <div style={{textAlign: "center"}}>
             <h2>Ready to Play Jeopardy?</h2>
             <form onSubmit={props.login}>
                 <input type='text' placeholder='Enter Username'/>
