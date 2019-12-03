@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Game from './Components/Game'
 import User from './Components/User'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 class App extends React.Component {
 
