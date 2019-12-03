@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Game from './Components/Game'
+import Game from './Containers/Game'
 import User from './Components/User'
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/css/bootstrap-theme.css';
+import LoginForm from './Components/LoginForm';
 
 class App extends React.Component {
 
@@ -11,7 +11,8 @@ class App extends React.Component {
     super()
     this.state={
       questionsArray: [],
-      showBack: []
+      showBack: [],
+      user: false
     }
   }
 
@@ -32,15 +33,29 @@ componentDidMount(){
       showBack: [...this.state.showBack, obj]
     })
   }
+
+  login = (event) => {
+    event.preventDefault()
+    this.setState({
+      user: true
+    })
+  }
  
   render(){
-    return (
-      <div>
-        <h1>Jeopardy!</h1>
+    let login = this.state.user
+    if (login === false) {
+      return  <LoginForm login={this.login}/>
+    }else{
+      return (
+        <div>
+          <h1>Jeopardy!</h1>
           <Game questions={this.state.questionsArray} flipCard={this.flipCard} cardSide={this.state.showBack}/>
           <User/>
-      </div>
-      );
+        </div>
+        );
+    }
+
+   
   }
  
 }
