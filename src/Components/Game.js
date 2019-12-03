@@ -1,13 +1,15 @@
 import React from 'react';
-import Column from './Column'
+import Card from './Card'
 
 let Game = (props) => {
-    // console.log(props.qData)
     return (
         <div>
-    
-        {props.qData.map(q => console.log(q))}
-    
+            <h3>game cards here
+            </h3>
+                    {props.questions.map(question => {
+                       return <Card question={question} key={question.correct_answer} />
+                    })}
+
         </div>
     )
 }

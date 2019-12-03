@@ -8,26 +8,26 @@ class App extends React.Component {
   constructor(){
     super()
     this.state={
-      response: [],
+      questionsArray: []
     }
   }
 
 
 componentDidMount(){
- fetch('https://opentdb.com/api.php?amount=50')
- .then(res=>res.json())
- .then(q => this.setState({
-   response: q.results
- }))
-}
-
-
+  fetch('https://opentdb.com/api.php?amount=50')
+  .then(questionData => questionData.json())
+  .then(questionArray => {
+    this.setState({
+      questionsArray: questionArray.results
+    })
+  })
+  }
  
   render(){
     return (
       <div>
         <h1>Jeopardy!</h1>
-         <Game qData={this.state.response} />
+          <Game questions={this.state.questionsArray}/>
           <User/>
       </div>
       );
