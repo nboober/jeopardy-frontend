@@ -1,7 +1,6 @@
 import React from 'react';
 
 let CardBack = (props) => {
-    // console.log(props)
     return (
         <div className="card col" style={{width: "18rem", textAlign: "center"}} >
             <div className="card-body">
