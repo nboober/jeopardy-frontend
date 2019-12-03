@@ -3,7 +3,7 @@ import React from 'react';
 let LoginForm = (props) => {
     console.log(props)
     return (
-        <div>
+        <div style={{textAlign: "center"}}>
             <h2>Ready to Play Jeopardy?</h2>
             <form>
                 <input type='text' placeholder='Enter Username'/>

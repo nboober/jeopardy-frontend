@@ -3,7 +3,7 @@ import Card from './Card'
 
 let Game = (props) => {
     return (
-        <div className="container">
+        <div className="container col-lg" style={{margin: "0 auto"}}>
 
             <div className="row">
             
