@@ -3,7 +3,6 @@ import './App.css';
 import Game from './Containers/Game'
 import User from './Components/User'
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/css/bootstrap-theme.css';
 import LoginForm from './Components/LoginForm';
 
 class App extends React.Component {
@@ -32,6 +31,13 @@ componentDidMount(){
     console.log(obj)
     this.setState({
       showBack: [...this.state.showBack, obj]
+    })
+  }
+
+  login = (event) => {
+    event.preventDefault()
+    this.setState({
+      user: true
     })
   }
  

@@ -14,7 +14,6 @@ let Game = (props) => {
                                 key={question.question} 
                                 flipCard={props.flipCard}
                                 />
-                       return <Card question={question} key={question.question} />
                     })}
 
             </div>
