@@ -4,6 +4,8 @@ import Card from './Card'
 let Game = (props) => {
     return (
         <div className="container">
+
+            <div className="row">
             
                     {props.questions.map(question => {
                        return <Card 
@@ -14,6 +16,8 @@ let Game = (props) => {
                                 />
                        return <Card question={question} key={question.question} />
                     })}
+
+            </div>
 
         </div>
     )
