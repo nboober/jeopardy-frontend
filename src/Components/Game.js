@@ -8,39 +8,18 @@ let Game = (props) => {
             <h3>game cards here
             </h3>
             <table>
-                <tr>
-                    <th>{props.catTitles[0]}</th>
-                    <th>{props.catTitles[1]}</th>
-                    <th>{props.catTitles[2]}</th>
-                    <th>{props.catTitles[3]}</th>
-                    <th>{props.catTitles[4]}</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>{}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {props.questions.map(question => {
+                        return <Row question={question} />
+                    })}
 
-            {props.val200.map(question => {
-
-                return <tr><Row key={question.category.id} questionData={question} /></tr>})
-
-            }
-            {props.val400.map(question => {
-
-                return <tr><Row key={question.category.id} questionData={question} /></tr>})
-
-            }
-            {props.val600.map(question => {
-
-                return <tr><Row key={question.category.id} questionData={question} /></tr>})
-
-            }
-            {props.val800.map(question => {
-
-                return <tr><Row key={question.category.id} questionData={question} /></tr>})
-
-            }
-            {props.val1000.map(question => {
-
-                return <tr><Row key={question.category.id} questionData={question} /></tr>})
-
-            }
+                </tbody>
 
             </table>
 

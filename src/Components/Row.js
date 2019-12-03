@@ -1,10 +1,10 @@
 import React from 'react';
 
 let Row = (props) => {
-    // console.log(props.questionData)
+    console.log(props)
     return (
         <>
-                <td>{props.questionData.question}</td>
+                {/* <td>{props.question}</td> */}
         </>
         
             
