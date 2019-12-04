@@ -37,19 +37,26 @@ componentDidMount(){
       const diffA = a.difficulty;
       const diffB = b.difficulty;
     
+      // Trying to sort medium to hard
+      // if (diffA === "easy" && diffB === "medium") {
+      //   comparison = -1;
+      // }else if(diffA === "easy" && diffB === "hard"){
+      //   comparison = -1;
+      // } else if (diffA === "medium" && diffB === "easy"){
+      //   comparison = 0;
+      // }else if (diffA === "medium" && diffB === "hard") {
+      //   comparison = 0;
+      // } else if (diffA === "hard" && diffB === "medium"){
+      //   comparison = 2;
+      // }else if (diffA === "hard" && diffB === "easy"){
+      //   comparison = 2;
+      // }
+
       let comparison = 0;
-      if (diffA === "easy" && diffB === "medium") {
+      if (diffA > diffB) {
+        comparison = 1;
+      } else if (diffA < diffB) {
         comparison = -1;
-      }else if(diffA === "easy" && diffB === "hard"){
-        comparison = -1;
-      } else if (diffA === "medium" && diffB === "easy"){
-        comparison = 0;
-      }else if (diffA === "medium" && diffB === "hard") {
-        comparison = 0;
-      } else if (diffA === "hard" && diffB === "medium"){
-        comparison = 2;
-      }else if (diffA === "hard" && diffB === "easy"){
-        comparison = 2;
       }
       return comparison;
     }
