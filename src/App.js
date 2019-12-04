@@ -15,6 +15,7 @@ class App extends React.Component {
       showBack: [],
       user: false,
       currentQ: null,
+      needToAnswer: false,
       userAnswer: "",
       userScore: 0,
       questionsAnswered: 5
@@ -71,10 +72,17 @@ componentDidMount(){
   }
 
   flipCard = (obj) => {
-    this.setState({
-      showBack: [...this.state.showBack, obj],
-      currentQ: obj
-    })
+    if(this.state.needToAnswer){
+      alert("You need to answer the previous question first before moving on...")
+    }else{
+
+      this.setState({
+        needToAnswer: true,
+        showBack: [...this.state.showBack, obj],
+        currentQ: obj
+      })
+
+    }
   }
 
   login = (event) => {
@@ -154,7 +162,8 @@ componentDidMount(){
       this.evalAnswer()
       this.setState({
         userAnswer: "",
-        currentQ: null
+        currentQ: null,
+        needToAnswer: false
       })
     }
   }
