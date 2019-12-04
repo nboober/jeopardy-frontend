@@ -64,7 +64,7 @@ componentDidMount(){
     }
     
     let sortedArray = this.state.questionsArray.sort(compare)
-    console.log(sortedArray)
+    // console.log(sortedArray)
 
     this.setState({
       questionsArray: sortedArray
@@ -157,12 +157,22 @@ componentDidMount(){
     if (this.state.currentQ === null){
       alert("Choose a Question First")
     }else{
-      this.evalAnswer()
-      this.setState({
-        userAnswer: "",
-        currentQ: null,
-        needToAnswer: false
-      })
+
+      if(this.state.userAnswer.length <= 2){
+
+        alert("Your answer must be greater than 2 characters")
+
+      }else{
+
+        this.evalAnswer()
+        this.setState({
+          userAnswer: "",
+          currentQ: null,
+          needToAnswer: false
+        })
+
+      }
+
     }
   }
 
