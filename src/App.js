@@ -15,10 +15,10 @@ class App extends React.Component {
       showBack: [],
       user: false,
       currentQ: null,
-      userAnswer: ""
+      userAnswer: "",
+      userScore: 0
     }
   }
-
 
 componentDidMount(){
   fetch('https://opentdb.com/api.php?amount=25')
@@ -49,20 +49,66 @@ componentDidMount(){
       userAnswer: event.target.value
     })
   }
+ 
+  correct = () => {
+    let money = this.state.currentQ.difficulty
+    money === 'easy' ? (
+      this.setState({
+        userScore: this.state.userScore + 250
+      })
+    ) : (
+      money === 'medium' ? (
+        this.setState({
+          userScore: this.state.userScore + 500
+        })
+      ) : (
+       this.setState({
+        userScore: this.state.userScore + 1000
+       })
+      )
+    )
+  }
 
-  submitAnswer = (event) => {
-    event.preventDefault()
+  wrong = () => {
+    let money = this.state.currentQ.difficulty
+    money === 'easy' ? (
+      this.setState({
+        userScore: this.state.userScore - 250
+      })
+    ) : (
+      money === 'medium' ? (
+        this.setState({
+          userScore: this.state.userScore - 500
+        })
+      ) : (
+       this.setState({
+        userScore: this.state.userScore - 1000
+       })
+      )
+    )
+  }
+
+  evalAnswer = () => {
     let correctAnswer = this.state.currentQ.correct_answer.toLowerCase()
     let userAnswer = this.state.userAnswer.toLowerCase()
     if(correctAnswer.includes(userAnswer)){
-      alert("You are Correct!")
+      this.correct()
     }else{
-      alert("Ha You Dumbass!")
+      this.wrong()
     }
-    this.setState({
-      userAnswer: ""
-    })
-    
+  }
+
+  submitAnswer = (event) => {
+    event.preventDefault()
+    if (this.state.currentQ === null){
+      alert("Choose a Question First")
+    }else{
+      this.evalAnswer()
+      this.setState({
+        userAnswer: "",
+        currentQ: null
+      })
+    }
   }
  
   render(){
@@ -73,16 +119,19 @@ componentDidMount(){
       return (
         <div style={{textAlign: "center"}}>
           <h1>Jeopardy!</h1>
-          <AnswerInput submitAnswer={this.submitAnswer} answer={this.answer} userAnswer={this.state.userAnswer}/>
-          <Game questions={this.state.questionsArray} flipCard={this.flipCard} cardSide={this.state.showBack}/>
-          <User/>
+          <User score={this.state.userScore}/>
+          <AnswerInput 
+          submitAnswer={this.submitAnswer}
+          answer={this.answer} 
+          userAnswer={this.state.userAnswer}/>
+          <Game 
+          questions={this.state.questionsArray} 
+          flipCard={this.flipCard} 
+          cardSide={this.state.showBack}/>
         </div>
-        );
-    }
-
-   
+      );
+    } 
   }
- 
 }
 
 export default App;

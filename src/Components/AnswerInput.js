@@ -1,6 +1,7 @@
 import React from 'react';
 
 let AnswerInput = (props) => {
+    
     return (
         <div>
             <form onSubmit={props.submitAnswer}>

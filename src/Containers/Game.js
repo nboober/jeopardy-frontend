@@ -2,22 +2,19 @@ import React from 'react';
 import Card from './Card'
 
 let Game = (props) => {
+
     return (
         <div className="container col-lg" style={{margin: "0 auto"}}>
-
             <div className="row">
-            
-                    {props.questions.map(question => {
-                       return <Card 
-                                cardSide={props.cardSide} 
-                                question={question} 
-                                key={question.question} 
-                                flipCard={props.flipCard}
-                                />
-                    })}
-
+                {props.questions.map(question => {
+                    return <Card 
+                        cardSide={props.cardSide} 
+                        question={question} 
+                        key={question.question} 
+                        flipCard={props.flipCard}/>
+                    }
+                )}
             </div>
-
         </div>
     )
 }
