@@ -20,10 +20,10 @@ let CardFront = (props) => {
     }
 
     return (
-        <div className="card" style={{width: "11rem", height: "11rem", textAlign: "center"}} onClick={() => (props.flipCard(props.obj))} >
+        <div className="card card-font" style={{width: "16rem", height: "16rem", textAlign: "center", margin: "14px", backgroundColor: "#1400BC"}} onClick={() => (props.flipCard(props.obj))} >
             <div className="card-body">
-                <h5 className="card-title">{props.category}</h5>
-                <p className="card-text">{value}</p>
+                <h5 className="card-title" style={{fontSize: "2rem"}}>{props.category}</h5>
+                <p className="card-text" style={{fontSize: "1.5rem", color: "red"}}>{value}</p>
             </div>    
         </div>
     )

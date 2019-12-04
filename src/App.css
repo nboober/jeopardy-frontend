@@ -20,3 +20,12 @@
 .App-link {
   color: #09d3ac;
 }
+
+.card-font{
+  font-family: 'Anton', sans-serif;
+}
+
+.title-font{
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 50px;
+}
