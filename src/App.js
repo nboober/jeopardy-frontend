@@ -15,7 +15,8 @@ class App extends React.Component {
       showBack: [],
       user: false,
       currentQ: null,
-      userAnswer: ""
+      userAnswer: "",
+      userScore: 0
     }
   }
 
@@ -50,8 +51,12 @@ componentDidMount(){
     })
   }
 
-  submitAnswer = (event) => {
-    event.preventDefault()
+  setScore = () => {
+    let score = this.state.currentQ.difficulty
+    // switch()
+    console.log(score)
+  }
+  evalAnswer = () => {
     let correctAnswer = this.state.currentQ.correct_answer.toLowerCase()
     let userAnswer = this.state.userAnswer.toLowerCase()
     if(correctAnswer.includes(userAnswer)){
@@ -59,10 +64,20 @@ componentDidMount(){
     }else{
       alert("Ha You Dumbass!")
     }
-    this.setState({
-      userAnswer: ""
-    })
-    
+    this.setScore()
+  }
+
+  submitAnswer = (event) => {
+    event.preventDefault()
+    if (this.state.currentQ === null){
+      alert("Choose a Question First")
+    }else{
+      this.evalAnswer()
+      this.setState({
+        userAnswer: "",
+        currentQ: null
+      })
+    }
   }
  
   render(){
@@ -73,9 +88,9 @@ componentDidMount(){
       return (
         <div style={{textAlign: "center"}}>
           <h1>Jeopardy!</h1>
+          <User score={this.state.userScore}/>
           <AnswerInput submitAnswer={this.submitAnswer} answer={this.answer} userAnswer={this.state.userAnswer}/>
           <Game questions={this.state.questionsArray} flipCard={this.flipCard} cardSide={this.state.showBack}/>
-          <User/>
         </div>
         );
     }

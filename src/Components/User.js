@@ -1,14 +1,12 @@
 import React from 'react';
 
-let User = () => {
-
-
-        return (
-            <div>
-                <h3>username</h3>
-                <h3>currentscore</h3>
-            </div>
-        )
+let User = (props) => {
+    return (
+        <div>
+            <h3>username</h3>
+            <h3>{props.score}</h3>
+        </div>
+    )
    
 }
 
