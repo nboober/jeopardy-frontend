@@ -11,6 +11,8 @@ class App extends React.Component {
   constructor(){
     super()
     this.state={
+      username: "",
+      password: "",
       questionsArray: [],
       showBack: [],
       user: false,
@@ -84,12 +86,39 @@ componentDidMount(){
 
     }
   }
+  
+  collectLogin = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  } 
 
   login = (event) => {
     event.preventDefault()
-    this.setState({
-      user: true
+    let username = this.state.username
+    let password = this.state.password.toString()
+    console.log(username)
+    console.log(password)
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({username: username, password: password})
     })
+    .then(res => res.json())
+      .then(userObj => {
+        if(userObj){
+          this.setState({
+            user: true,
+            username: userObj.username,
+            password: ""
+          })
+        }else{
+          alert("Please Enter a Valid Login")
+        }
+      })
   }
 
   answer = (event) => {
@@ -186,12 +215,18 @@ componentDidMount(){
   render(){
     let login = this.state.user
     if (login === false) {
-      return  <LoginForm login={this.login} className="container" style={{textAlign: "center"}}/>
+      return  <LoginForm 
+              username={this.state.username} 
+              password={this.state.password} 
+              login={this.login} 
+              collect={this.collectLogin}
+              className="container" 
+              style={{textAlign: "center"}}/>
     }else{
       return (
         <div style={{textAlign: "center"}}>
           <h1>Jeopardy!</h1>
-          <User score={this.state.userScore}/>
+          <User score={this.state.userScore} username={this.state.username}/>
           <AnswerInput 
           submitAnswer={this.submitAnswer}
           answer={this.answer} 
