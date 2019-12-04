@@ -16,12 +16,13 @@ class App extends React.Component {
       user: false,
       currentQ: null,
       userAnswer: "",
-      userScore: 0
+      userScore: 0,
+      questionsAnswered: 5
     }
   }
 
 componentDidMount(){
-  fetch('https://opentdb.com/api.php?amount=25')
+  fetch('https://opentdb.com/api.php?amount=5')
   .then(questionData => questionData.json())
   .then(questionArray => {
     this.setState({
@@ -93,38 +94,46 @@ componentDidMount(){
     let money = this.state.currentQ.difficulty
     money === 'easy' ? (
       this.setState({
-        userScore: this.state.userScore + 250
+        userScore: this.state.userScore + 250,
+        questionsAnswered: --this.state.questionsAnswered
       })
     ) : (
       money === 'medium' ? (
         this.setState({
-          userScore: this.state.userScore + 500
+          userScore: this.state.userScore + 500,
+          questionsAnswered: --this.state.questionsAnswered
         })
       ) : (
        this.setState({
-        userScore: this.state.userScore + 1000
+        userScore: this.state.userScore + 1000,
+        questionsAnswered: --this.state.questionsAnswered
        })
       )
-    )
+      )
+      this.finishGame()
   }
 
   wrong = () => {
     let money = this.state.currentQ.difficulty
     money === 'easy' ? (
       this.setState({
-        userScore: this.state.userScore - 250
+        userScore: this.state.userScore - 250,
+        questionsAnswered: --this.state.questionsAnswered
       })
     ) : (
       money === 'medium' ? (
         this.setState({
-          userScore: this.state.userScore - 500
+          userScore: this.state.userScore - 500,
+          questionsAnswered: --this.state.questionsAnswered
         })
       ) : (
        this.setState({
-        userScore: this.state.userScore - 1000
+        userScore: this.state.userScore - 1000,
+        questionsAnswered: --this.state.questionsAnswered
        })
       )
     )
+    this.finishGame()
   }
 
   evalAnswer = () => {
@@ -147,6 +156,12 @@ componentDidMount(){
         userAnswer: "",
         currentQ: null
       })
+    }
+  }
+
+  finishGame = () => {
+    if(this.state.questionsAnswered === 0){
+      alert("Game Over, Your Final Score is " + this.state.userScore)
     }
   }
  
