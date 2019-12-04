@@ -5,6 +5,9 @@ import User from './Components/User'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginForm from './Components/LoginForm';
 import AnswerInput from './Components/AnswerInput'
+import welcome from './welcome.mp3'
+import wrong from './wrongAnswer.mp3'
+import right from './rightAnswer.mp3'
 
 class App extends React.Component {
 
@@ -22,6 +25,9 @@ class App extends React.Component {
       userScore: 0,
       questionsRemaining: 25
     }
+    this.welcome = new Audio(welcome)
+    this.wrongAnswer = new Audio(wrong)
+    this.rightAnswer = new Audio(right)
   }
 
 componentDidMount(){
@@ -97,8 +103,6 @@ componentDidMount(){
     event.preventDefault()
     let username = this.state.username
     let password = this.state.password.toString()
-    console.log(username)
-    console.log(password)
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
@@ -110,6 +114,7 @@ componentDidMount(){
     .then(res => res.json())
       .then(userObj => {
         if(userObj){
+          this.welcome.play()
           this.setState({
             user: true,
             username: userObj.username,
@@ -175,8 +180,10 @@ componentDidMount(){
     let correctAnswer = this.state.currentQ.correct_answer.toLowerCase()
     let userAnswer = this.state.userAnswer.toLowerCase()
     if(correctAnswer.includes(userAnswer)){
+      this.rightAnswer.play()
       this.correct()
     }else{
+      this.wrongAnswer.play()
       this.wrong()
     }
   }
@@ -206,7 +213,6 @@ componentDidMount(){
   }
 
   componentDidUpdate = () => {
-    // Finish Game Conditional
     if(this.state.questionsRemaining === 0){
       alert("Game Over, Your Final Score is " + this.state.userScore)
       window.location.reload()
