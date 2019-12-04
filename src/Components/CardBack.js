@@ -3,7 +3,7 @@ import React from 'react';
 let CardBack = (props) => {
     
     return (
-        <div className="card card-font" style={{width: "16rem", height: "16rem", overflowY: "scroll", textAlign: "center", margin: "14px", backgroundColor: "#1400BC"}} >
+        <div className="card card-font" style={{width: "16rem", height: "16rem", textAlign: "center", margin: "14px", backgroundColor: "#1400BC"}} >
             <div className="card-body">
                 <h5 className="card-title">
                     {props.question.replace(/(&quot;|&#039;|&|acute;|amp;|;)/g, '')}
