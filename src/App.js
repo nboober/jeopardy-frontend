@@ -27,7 +27,32 @@ componentDidMount(){
     this.setState({
       questionsArray: questionArray.results
     })
+    this.sortByDifficulty()
   })
+  }
+
+  sortByDifficulty = () =>{
+
+    function compare(a, b) {
+      // Use toUpperCase() to ignore character casing
+      const diffA = a.difficulty;
+      const diffB = b.difficulty;
+    
+      let comparison = 0;
+      if (diffA > diffB) {
+        comparison = 1;
+      } else if (diffA < diffB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+    
+    let sortedArray = this.state.questionsArray.sort(compare)
+    // console.log(sortedArray)
+
+    this.setState({
+      questionsArray: sortedArray
+    })
   }
 
   flipCard = (obj) => {
