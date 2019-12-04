@@ -226,7 +226,7 @@ componentDidMount(){
     }else{
       return (
         <div style={{textAlign: "center", backgroundImage: "linear-gradient(to left bottom, #051937, #331a4c, #66004b, #900033, #a40101)", color: "white"}}>
-          <h1 className="title-font">Jeopardy!</h1>
+          <h1 className="title-font" style={{color: "#FBCA76"}}>Jeopardy!</h1>
           <User score={this.state.userScore} username={this.state.username}/>
           <AnswerInput 
           submitAnswer={this.submitAnswer}

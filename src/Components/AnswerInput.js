@@ -6,8 +6,9 @@ let AnswerInput = (props) => {
         <div>
             <form onSubmit={props.submitAnswer}>
             <div className="row d-flex justify-content-center ">
-                <input className="form-control col-sm-5" type='text' placeholder='Your Answer Here' value={props.userAnswer} onChange={props.answer}/>
-                <input className="btn btn-warning col-sm-2" type='submit' value='Submit'/>
+                <span style={{fontSize: "25px", fontWeight: "bold", paddingRight: "10px"}}>What is </span> 
+                <input className="form-control col-sm-3" type='text' placeholder='Your Answer Here' value={props.userAnswer} onChange={props.answer}/>
+                <input className="btn btn-warning col-sm-1" type='submit' value='Submit'/>
             </div>
             </form>
         </div>
