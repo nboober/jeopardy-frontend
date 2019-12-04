@@ -99,8 +99,8 @@ componentDidMount(){
     event.preventDefault()
     let username = this.state.username
     let password = this.state.password.toString()
-    console.log(username)
-    console.log(password)
+    // console.log(username)
+    // console.log(password)
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
