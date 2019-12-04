@@ -34,21 +34,28 @@ componentDidMount(){
   sortByDifficulty = () =>{
 
     function compare(a, b) {
-      // Use toUpperCase() to ignore character casing
       const diffA = a.difficulty;
       const diffB = b.difficulty;
     
       let comparison = 0;
-      if (diffA > diffB) {
-        comparison = 1;
-      } else if (diffA < diffB) {
+      if (diffA === "easy" && diffB === "medium") {
         comparison = -1;
+      }else if(diffA === "easy" && diffB === "hard"){
+        comparison = -1;
+      } else if (diffA === "medium" && diffB === "easy"){
+        comparison = 0;
+      }else if (diffA === "medium" && diffB === "hard") {
+        comparison = 0;
+      } else if (diffA === "hard" && diffB === "medium"){
+        comparison = 2;
+      }else if (diffA === "hard" && diffB === "easy"){
+        comparison = 2;
       }
       return comparison;
     }
     
     let sortedArray = this.state.questionsArray.sort(compare)
-    // console.log(sortedArray)
+    console.log(sortedArray)
 
     this.setState({
       questionsArray: sortedArray

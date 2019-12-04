@@ -1,7 +1,7 @@
 import React from 'react';
 
 let CardFront = (props) => {
-console.log(props)
+// console.log(props)
 
     let difficulty = props.value;
     let value;
