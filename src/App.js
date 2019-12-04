@@ -129,7 +129,7 @@ componentDidMount(){
           flipCard={this.flipCard} 
           cardSide={this.state.showBack}/>
         </div>
-        );
+      );
     } 
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 let CardFront = (props) => {
-
+console.log(props)
     return (
         <div className="card" style={{width: "11rem", height: "11rem", textAlign: "center"}} onClick={() => (props.flipCard(props.obj))} >
             <div className="card-body">

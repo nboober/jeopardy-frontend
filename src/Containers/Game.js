@@ -11,7 +11,7 @@ let Game = (props) => {
                         cardSide={props.cardSide} 
                         question={question} 
                         key={question.question} 
-                        lipCard={props.flipCard}/>
+                        flipCard={props.flipCard}/>
                     }
                 )}
             </div>
