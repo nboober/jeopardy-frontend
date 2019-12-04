@@ -4,12 +4,11 @@ import CardBack from './CardBack';
 
 
 let Card = (props) => {
+    
     return (
         <div>
             {props.cardSide.includes(props.question) ? (
-                <CardBack 
-                    question={props.question.question}
-                />
+                <CardBack question={props.question.question}/>
                 ) : (
                     <CardFront 
                         obj={props.question}
@@ -17,9 +16,7 @@ let Card = (props) => {
                         category={props.question.category} 
                         value={props.question.difficulty}/>
             )}
-
         </div>
-     
     )
 }
 

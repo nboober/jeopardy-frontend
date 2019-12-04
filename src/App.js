@@ -20,7 +20,6 @@ class App extends React.Component {
     }
   }
 
-
 componentDidMount(){
   fetch('https://opentdb.com/api.php?amount=25')
   .then(questionData => questionData.json())
@@ -121,15 +120,18 @@ componentDidMount(){
         <div style={{textAlign: "center"}}>
           <h1>Jeopardy!</h1>
           <User score={this.state.userScore}/>
-          <AnswerInput submitAnswer={this.submitAnswer} answer={this.answer} userAnswer={this.state.userAnswer}/>
-          <Game questions={this.state.questionsArray} flipCard={this.flipCard} cardSide={this.state.showBack}/>
+          <AnswerInput 
+          submitAnswer={this.submitAnswer}
+          answer={this.answer} 
+          userAnswer={this.state.userAnswer}/>
+          <Game 
+          questions={this.state.questionsArray} 
+          flipCard={this.flipCard} 
+          cardSide={this.state.showBack}/>
         </div>
         );
-    }
-
-   
+    } 
   }
- 
 }
 
 export default App;

@@ -1,6 +1,7 @@
 import React from 'react';
 
 let LoginForm = (props) => {
+    
     return (
         <div style={{textAlign: "center"}}>
             <h2>Ready to Play Jeopardy?</h2>
