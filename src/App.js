@@ -20,12 +20,12 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsAnswered: 5
+      questionsAnswered: 25
     }
   }
 
 componentDidMount(){
-  fetch('https://opentdb.com/api.php?amount=5')
+  fetch('https://opentdb.com/api.php?amount=25')
   .then(questionData => questionData.json())
   .then(questionArray => {
     this.setState({
@@ -225,7 +225,7 @@ componentDidMount(){
               style={{textAlign: "center"}}/>
     }else{
       return (
-        <div style={{textAlign: "center", height: "100vh", backgroundImage: "linear-gradient(to left bottom, #051937, #331a4c, #66004b, #900033, #a40101)", color: "white"}}>
+        <div style={{textAlign: "center", backgroundImage: "linear-gradient(to left bottom, #051937, #331a4c, #66004b, #900033, #a40101)", color: "white"}}>
           <h1 className="title-font">Jeopardy!</h1>
           <User score={this.state.userScore} username={this.state.username}/>
           <AnswerInput 
