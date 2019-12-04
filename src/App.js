@@ -209,6 +209,7 @@ componentDidMount(){
     // Finish Game Conditional
     if(this.state.questionsAnswered === 0){
       alert("Game Over, Your Final Score is " + this.state.userScore)
+      window.location.reload()
     }
   }
  
