@@ -50,21 +50,53 @@ componentDidMount(){
       userAnswer: event.target.value
     })
   }
-
-  setScore = () => {
-    let score = this.state.currentQ.difficulty
-    // switch()
-    console.log(score)
+ 
+  correct = () => {
+    let money = this.state.currentQ.difficulty
+    money === 'easy' ? (
+      this.setState({
+        userScore: this.state.userScore + 250
+      })
+    ) : (
+      money === 'medium' ? (
+        this.setState({
+          userScore: this.state.userScore + 500
+        })
+      ) : (
+       this.setState({
+        userScore: this.state.userScore + 1000
+       })
+      )
+    )
   }
+
+  wrong = () => {
+    let money = this.state.currentQ.difficulty
+    money === 'easy' ? (
+      this.setState({
+        userScore: this.state.userScore - 250
+      })
+    ) : (
+      money === 'medium' ? (
+        this.setState({
+          userScore: this.state.userScore - 500
+        })
+      ) : (
+       this.setState({
+        userScore: this.state.userScore - 1000
+       })
+      )
+    )
+  }
+
   evalAnswer = () => {
     let correctAnswer = this.state.currentQ.correct_answer.toLowerCase()
     let userAnswer = this.state.userAnswer.toLowerCase()
     if(correctAnswer.includes(userAnswer)){
-      alert("You are Correct!")
+      this.correct()
     }else{
-      alert("Ha You Dumbass!")
+      this.wrong()
     }
-    this.setScore()
   }
 
   submitAnswer = (event) => {
