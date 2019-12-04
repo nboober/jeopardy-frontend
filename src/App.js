@@ -25,6 +25,8 @@ class App extends React.Component {
   }
 
 componentDidMount(){
+  let welcome = new Audio('Welcome.mp3')
+  welcome.play()
   fetch('https://opentdb.com/api.php?amount=5')
   .then(questionData => questionData.json())
   .then(questionArray => {
@@ -115,10 +117,15 @@ componentDidMount(){
             username: userObj.username,
             password: ""
           })
+          this.welcomeAudio()
         }else{
           alert("Please Enter a Valid Login")
         }
       })
+  }
+  
+  welcomeAudio = () => {
+    console.log('welcome logic here')
   }
 
   answer = (event) => {
