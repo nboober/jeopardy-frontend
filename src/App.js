@@ -20,7 +20,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsAnswered: 25
+      questionsRemaining: 25
     }
   }
 
@@ -132,18 +132,18 @@ componentDidMount(){
     money === 'easy' ? (
       this.setState({
         userScore: this.state.userScore + 250,
-        questionsAnswered: --this.state.questionsAnswered
+        questionsRemaining: --this.state.questionsRemaining
       })
     ) : (
       money === 'medium' ? (
         this.setState({
           userScore: this.state.userScore + 500,
-          questionsAnswered: --this.state.questionsAnswered
+          questionsRemaining: --this.state.questionsRemaining
         })
       ) : (
        this.setState({
         userScore: this.state.userScore + 1000,
-        questionsAnswered: --this.state.questionsAnswered
+        questionsRemaining: --this.state.questionsRemaining
        })
       )
       )
@@ -154,18 +154,18 @@ componentDidMount(){
     money === 'easy' ? (
       this.setState({
         userScore: this.state.userScore - 250,
-        questionsAnswered: --this.state.questionsAnswered
+        questionsRemaining: --this.state.questionsRemaining
       })
     ) : (
       money === 'medium' ? (
         this.setState({
           userScore: this.state.userScore - 500,
-          questionsAnswered: --this.state.questionsAnswered
+          questionsRemaining: --this.state.questionsRemaining
         })
       ) : (
        this.setState({
         userScore: this.state.userScore - 1000,
-        questionsAnswered: --this.state.questionsAnswered
+        questionsRemaining: --this.state.questionsRemaining
        })
       )
     )
@@ -207,7 +207,7 @@ componentDidMount(){
 
   componentDidUpdate = () => {
     // Finish Game Conditional
-    if(this.state.questionsAnswered === 0){
+    if(this.state.questionsRemaining === 0){
       alert("Game Over, Your Final Score is " + this.state.userScore)
       window.location.reload()
     }
