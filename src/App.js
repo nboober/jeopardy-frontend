@@ -224,9 +224,9 @@ componentDidMount(){
       alert("Choose a Question First")
     }else{
 
-      if(this.state.userAnswer.length === 0){
+      if(this.state.userAnswer.length < 1){
 
-        alert("Your answer must be atleast 1 character")
+        alert("Please enter an answer")
 
       }else{
 
