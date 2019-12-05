@@ -149,7 +149,7 @@ componentDidMount(){
   }
 
   answer = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     this.setState({
       userAnswer: event.target.value
     })

@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 
 let Game = (props) => {
-console.log(props)
+// console.log(props)
     return (
         <div className="container col-lg" style={{margin: "0 auto"}}>
             

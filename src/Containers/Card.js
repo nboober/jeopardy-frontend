@@ -7,7 +7,7 @@ let Card = (props) => {
     return (
         <div>
             {props.cardSide.includes(props.question)?(
-                 <CardBack question={props.question.question}/>
+                 <CardBack question={props.question.question} questionObj={props.question}/>
                 ) : (
                 <CardFront 
                 obj={props.question}
