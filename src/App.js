@@ -27,7 +27,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 1,
+      questionsRemaining: 25,
       audio: true
     }
     this.welcome = new Audio(welcome)
@@ -46,7 +46,7 @@ componentDidMount(){
     this.easyQ()
     this.mediumQ()
     this.hardQ()
-    console.log(this.state.questionsArray)
+    // console.log(this.state.questionsArray)
   })
   }
 
