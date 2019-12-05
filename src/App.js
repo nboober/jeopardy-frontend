@@ -23,7 +23,8 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 25
+      questionsRemaining: 25,
+      audio: true
     }
     this.welcome = new Audio(welcome)
     this.wrongAnswer = new Audio(wrong)
@@ -37,8 +38,13 @@ componentDidMount(){
     this.setState({
       questionsArray: questionArray.results
     })
+    this.playWelcome()
     this.sortByDifficulty()
   })
+  }
+
+  playWelcome = () => {
+    if (this.state.audio === true) {this.welcome.play()} 
   }
 
   sortByDifficulty = () =>{
@@ -116,13 +122,12 @@ componentDidMount(){
     .then(res => res.json())
       .then(userObj => {
         if(userObj){
-          this.welcome.play()
           this.setState({
             user: userObj,
             username: userObj.username,
-            password: ""
+            password: "",
+            audio: false
           },()=>{this.fetchUser()})
-
         }else{
           alert("Please Enter a Valid Login")
         }
