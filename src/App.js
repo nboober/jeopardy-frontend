@@ -27,7 +27,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 1,
+      questionsRemaining: 15,
       audio: true
     }
     this.welcome = new Audio(welcome)
@@ -46,7 +46,6 @@ componentDidMount(){
     this.easyQ()
     this.mediumQ()
     this.hardQ()
-    console.log(this.state.questionsArray)
   })
   }
 
@@ -77,6 +76,7 @@ componentDidMount(){
   }
 
   flipCard = (obj) => {
+    console.log(obj)
     if(this.state.needToAnswer){
 
       Swal.fire({

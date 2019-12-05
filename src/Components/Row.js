@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '../Containers/Card'
 
 let Row = (props) => {
-    
     return (
         <div className="row">
         {props.difficulty.map(question => {
