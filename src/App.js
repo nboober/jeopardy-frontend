@@ -24,7 +24,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 2,
+      questionsRemaining: 1,
       audio: true
     }
     this.welcome = new Audio(welcome)
@@ -269,9 +269,9 @@ componentDidMount(){
     if(this.state.questionsRemaining === 0){
 
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: "Game Over, Your Final Score is " + this.state.userScore + ".\n You will be logged out in 5 seconds"
+        icon: 'success',
+        title: 'Game Completed',
+        text: "Your Final Score is " + this.state.userScore + ".\n You will be logged out in 5 seconds"
       })
 
       fetch('http://localhost:3000/games',{
@@ -291,6 +291,7 @@ componentDidMount(){
       .then(newGame => {
         console.log(newGame)
       })
+
       setTimeout(function(){
 
         window.location.reload()
