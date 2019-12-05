@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
 import Game from './Containers/Game'
-import User from './Components/User'
+// import User from './Components/User'
+import Profile from './Components/Profile'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginForm from './Components/LoginForm';
 import AnswerInput from './Components/AnswerInput'
 import welcome from './welcome.mp3'
 import wrong from './wrongAnswer.mp3'
 import right from './rightAnswer.mp3'
+// import AnswerInput from './Components/AnswerInput'
+import {BrowserRouter, Route, Redirect} from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -23,7 +26,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 25
+      questionsRemaining: 1
     }
     this.welcome = new Audio(welcome)
     this.wrongAnswer = new Audio(wrong)
@@ -103,6 +106,8 @@ componentDidMount(){
     event.preventDefault()
     let username = this.state.username
     let password = this.state.password.toString()
+    // console.log(username)
+    // console.log(password)
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
@@ -116,17 +121,40 @@ componentDidMount(){
         if(userObj){
           this.welcome.play()
           this.setState({
-            user: true,
+            user: userObj,
             username: userObj.username,
             password: ""
-          })
+          },()=>{this.fetchUser()})
+
         }else{
           alert("Please Enter a Valid Login")
         }
       })
   }
 
+  fetchUser = () => {
+    let user_id = this.state.user.id;
+    fetch(`http://localhost:3000/users/${user_id}`)
+    .then(response => response.json())
+    .then(userObj => {
+      this.setState({
+        user: userObj
+      })
+    })
+  }
+
+  logout = () => {
+    // this.setState({
+    //   username: "",
+    //   password: "",
+    //   user: false
+    // })
+    window.location.reload()
+  }
+
   answer = (event) => {
+
+    console.log(event.target.value)
     this.setState({
       userAnswer: event.target.value
     })
@@ -215,37 +243,74 @@ componentDidMount(){
   componentDidUpdate = () => {
     if(this.state.questionsRemaining === 0){
       alert("Game Over, Your Final Score is " + this.state.userScore)
+
+      fetch('http://localhost:3000/games',{
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({ game: {
+          highscore: this.state.userScore,
+          user_id: this.state.user.id
+        }
+          
+        })
+      })
+      .then(response => response.json())
+      .then(newGame => {
+        console.log(newGame)
+      })
       window.location.reload()
     }
   }
  
   render(){
     let login = this.state.user
-    if (login === false) {
-      return  <LoginForm 
-              username={this.state.username} 
-              password={this.state.password} 
-              login={this.login} 
-              collect={this.collectLogin}
-              className="container" 
-              style={{textAlign: "center"}}/>
-    }else{
+    
       return (
-        <div style={{textAlign: "center", backgroundImage: "linear-gradient(to left bottom, #051937, #331a4c, #66004b, #900033, #a40101)", color: "white"}}>
-          <h1 className="title-font" style={{color: "#FBCA76"}}>Jeopardy!</h1>
-          <User score={this.state.userScore} username={this.state.username}/>
-          <AnswerInput 
-          submitAnswer={this.submitAnswer}
-          answer={this.answer} 
-          userAnswer={this.state.userAnswer}/>
-          <Game 
-          questions={this.state.questionsArray} 
-          flipCard={this.flipCard} 
-          cardSide={this.state.showBack}/>
-        </div>
+        <BrowserRouter>
+          <div style={{textAlign: "center", backgroundImage: "linear-gradient(to left bottom, #051937, #331a4c, #66004b, #900033, #a40101)", color: "white"}}>
+            
+            {login === false ? <Redirect to="/" /> : (
+              <Redirect to="/game" />
+            )}
+
+            <Route exact path="/" render={() => {
+                    return  <LoginForm 
+                              username={this.state.username} 
+                              password={this.state.password} 
+                              login={this.login} 
+                              collect={this.collectLogin}
+                              className="container" 
+                              style={{textAlign: "center"}}/>
+            }} />
+            
+            <Route exact path="/profile" render = {()=>{
+              return <Profile
+                      logout={this.logout}
+                      user={this.state.user}
+                      />
+            }} />
+
+            <Route exact path="/game" render={()=>{
+
+              return <Game 
+                  logout={this.logout}
+                  score={this.state.userScore}
+                  username={this.state.username}
+                  answer={this.answer}
+                  submitAnswer={this.submitAnswer}
+                  userAnswer={this.state.userAnswer}
+                  questions={this.state.questionsArray} 
+                  flipCard={this.flipCard} 
+                  cardSide={this.state.showBack}/>
+            }}/>
+
+          </div>
+        </BrowserRouter>
       );
     } 
   }
-}
 
 export default App;
