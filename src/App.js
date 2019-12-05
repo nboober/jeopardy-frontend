@@ -1,15 +1,12 @@
 import React from 'react';
 import './App.css';
 import Game from './Containers/Game'
-// import User from './Components/User'
 import Profile from './Components/Profile'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginForm from './Components/LoginForm';
-import AnswerInput from './Components/AnswerInput'
 import welcome from './welcome.mp3'
 import wrong from './wrongAnswer.mp3'
 import right from './rightAnswer.mp3'
-// import AnswerInput from './Components/AnswerInput'
 import {BrowserRouter, Route, Redirect} from 'react-router-dom'
 
 class App extends React.Component {
