@@ -22,7 +22,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 25
+      questionsRemaining: 1
     }
   }
 
@@ -113,22 +113,35 @@ componentDidMount(){
       .then(userObj => {
         if(userObj){
           this.setState({
-            user: true,
+            user: userObj,
             username: userObj.username,
             password: ""
-          })
+          },()=>{this.fetchUser()})
+
         }else{
           alert("Please Enter a Valid Login")
         }
       })
   }
 
-  logout = () => {
-    this.setState({
-      username: "",
-      password: "",
-      user: false
+  fetchUser = () => {
+    let user_id = this.state.user.id;
+    fetch(`http://localhost:3000/users/${user_id}`)
+    .then(response => response.json())
+    .then(userObj => {
+      this.setState({
+        user: userObj
+      })
     })
+  }
+
+  logout = () => {
+    // this.setState({
+    //   username: "",
+    //   password: "",
+    //   user: false
+    // })
+    window.location.reload()
   }
 
   answer = (event) => {
@@ -221,6 +234,24 @@ componentDidMount(){
     // Finish Game Conditional
     if(this.state.questionsRemaining === 0){
       alert("Game Over, Your Final Score is " + this.state.userScore)
+
+      fetch('http://localhost:3000/games',{
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({ game: {
+          highscore: this.state.userScore,
+          user_id: this.state.user.id
+        }
+          
+        })
+      })
+      .then(response => response.json())
+      .then(newGame => {
+        console.log(newGame)
+      })
       window.location.reload()
     }
   }
@@ -249,6 +280,7 @@ componentDidMount(){
             <Route exact path="/profile" render = {()=>{
               return <Profile
                       logout={this.logout}
+                      user={this.state.user}
                       />
             }} />
 
