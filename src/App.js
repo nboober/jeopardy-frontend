@@ -4,6 +4,7 @@ import Game from './Containers/Game'
 import Profile from './Components/Profile'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginForm from './Components/LoginForm';
+import Swal from 'sweetalert2'
 import welcome from './welcome.mp3'
 import wrong from './wrongAnswer.mp3'
 import right from './rightAnswer.mp3'
@@ -87,8 +88,14 @@ componentDidMount(){
 
   flipCard = (obj) => {
     if(this.state.needToAnswer){
-      alert("You need to answer the previous question first before moving on...")
-    }else{
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "You need to answer the previous question first before moving on..."
+      })
+
+        }else{
 
       this.setState({
         needToAnswer: true,
@@ -129,7 +136,11 @@ componentDidMount(){
             audio: false
           },()=>{this.fetchUser()})
         }else{
-          alert("Please Enter a Valid Login")
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Please Enter a Valid Login"
+          })
         }
       })
   }
@@ -221,12 +232,24 @@ componentDidMount(){
   submitAnswer = (event) => {
     event.preventDefault()
     if (this.state.currentQ === null){
-      alert("Choose a Question First")
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Choose a Question First"
+      })
+
+      
+
     }else{
 
       if(this.state.userAnswer.length < 1){
 
-        alert("Please enter an answer")
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "Please enter an answer"
+        })
 
       }else{
 
@@ -244,7 +267,11 @@ componentDidMount(){
 
   componentDidUpdate = () => {
     if(this.state.questionsRemaining === 0){
-      alert("Game Over, Your Final Score is " + this.state.userScore)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Game Over, Your Final Score is " + this.state.userScore
+      })
 
       fetch('http://localhost:3000/games',{
         method: 'POST',
