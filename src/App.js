@@ -27,7 +27,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 25,
+      questionsRemaining: 15,
       audio: true
     }
     this.welcome = new Audio(welcome)
@@ -205,9 +205,19 @@ componentDidMount(){
     if(correctAnswer.includes(userAnswer)){
       this.rightAnswer.play()
       this.correct()
+      Swal.fire({
+        icon: 'success',
+        title: 'Correct!',
+        text: `The Right Answer is: ${this.state.currentQ.correct_answer}`
+      })
     }else{
       this.wrongAnswer.play()
       this.wrong()
+      Swal.fire({
+        icon: 'error',
+        title: 'So Sorry!',
+        text: `The Right Answer is: ${this.state.currentQ.correct_answer}`
+      })
     }
   }
 
