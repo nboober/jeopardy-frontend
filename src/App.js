@@ -16,6 +16,9 @@ class App extends React.Component {
     this.state={
       username: "",
       password: "",
+      easyQ: [],
+      mediumQ: [],
+      hardQ: [],
       questionsArray: [],
       showBack: [],
       user: false,
@@ -32,57 +35,44 @@ class App extends React.Component {
   }
 
 componentDidMount(){
-  fetch('https://opentdb.com/api.php?amount=25')
+  fetch('https://opentdb.com/api.php?amount=50')
   .then(questionData => questionData.json())
   .then(questionArray => {
     this.setState({
       questionsArray: questionArray.results
     })
     this.playWelcome()
-    this.sortByDifficulty()
+    this.easyQ()
+    this.mediumQ()
+    this.hardQ()
+    console.log(this.state.questionsArray)
   })
+  }
+
+  easyQ = () =>{
+    let easy = this.state.questionsArray.filter(q => q.difficulty === 'easy')
+    let easyF = easy.slice(0,5)
+    this.setState({
+      easyQ: easyF
+    })
+  }
+  mediumQ = () =>{
+    let medium = this.state.questionsArray.filter(q => q.difficulty === 'medium')
+    let mediumF = medium.slice(0,5)
+    this.setState({
+      mediumQ: mediumF
+    })
+  }
+  hardQ = () =>{
+    let hard = this.state.questionsArray.filter(q => q.difficulty === 'hard')
+    let hardF = hard.slice(0,5)
+    this.setState({
+      hardQ: hardF
+    })
   }
 
   playWelcome = () => {
     if (this.state.audio === true) {this.welcome.play()} 
-  }
-
-  sortByDifficulty = () =>{
-
-    function compare(a, b) {
-      const diffA = a.difficulty;
-      const diffB = b.difficulty;
-    
-      // Trying to sort medium to hard
-      // if (diffA === "easy" && diffB === "medium") {
-      //   comparison = -1;
-      // }else if(diffA === "easy" && diffB === "hard"){
-      //   comparison = -1;
-      // } else if (diffA === "medium" && diffB === "easy"){
-      //   comparison = 0;
-      // }else if (diffA === "medium" && diffB === "hard") {
-      //   comparison = 0;
-      // } else if (diffA === "hard" && diffB === "medium"){
-      //   comparison = 2;
-      // }else if (diffA === "hard" && diffB === "easy"){
-      //   comparison = 2;
-      // }
-
-      let comparison = 0;
-      if (diffA > diffB) {
-        comparison = 1;
-      } else if (diffA < diffB) {
-        comparison = -1;
-      }
-      return comparison;
-    }
-    
-    let sortedArray = this.state.questionsArray.sort(compare)
-    // console.log(sortedArray)
-
-    this.setState({
-      questionsArray: sortedArray
-    })
   }
 
   flipCard = (obj) => {
@@ -109,8 +99,6 @@ componentDidMount(){
     event.preventDefault()
     let username = this.state.username
     let password = this.state.password.toString()
-    // console.log(username)
-    // console.log(password)
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
@@ -146,16 +134,10 @@ componentDidMount(){
   }
 
   logout = () => {
-    // this.setState({
-    //   username: "",
-    //   password: "",
-    //   user: false
-    // })
     window.location.reload()
   }
 
   answer = (event) => {
-
     console.log(event.target.value)
     this.setState({
       userAnswer: event.target.value
@@ -306,7 +288,10 @@ componentDidMount(){
                   userAnswer={this.state.userAnswer}
                   questions={this.state.questionsArray} 
                   flipCard={this.flipCard} 
-                  cardSide={this.state.showBack}/>
+                  cardSide={this.state.showBack}
+                  easy={this.state.easyQ}
+                  medium={this.state.mediumQ}
+                  hard={this.state.hardQ}/>
             }}/>
 
           </div>
