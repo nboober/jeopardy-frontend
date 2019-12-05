@@ -23,9 +23,11 @@ let Game = (props) => {
             <Row difficulty={props.easy}
              cardSide={props.cardSide}
              flipCard={props.flipCard}/>
+
             <Row  difficulty={props.medium}
              cardSide={props.cardSide}
              flipCard={props.flipCard}/>
+             
             <Row  difficulty={props.hard}
              cardSide={props.cardSide}
              flipCard={props.flipCard}/> 

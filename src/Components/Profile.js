@@ -17,7 +17,6 @@ class Profile extends React.Component{
      compare = (a, b) => {
         const ScoreA = a.highscore;
         const ScoreB = b.highscore;
-  
         let comparison = 0;
         if (ScoreA > ScoreB) {
           comparison = -1;
@@ -54,7 +53,6 @@ class Profile extends React.Component{
                     return <HighScores key={game.id} game={game}/>
                 })}
                 </div>
-
             </div>
         )
     }

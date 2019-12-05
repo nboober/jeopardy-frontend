@@ -56,6 +56,7 @@ componentDidMount(){
       easyQ: easyF
     })
   }
+
   mediumQ = () =>{
     let medium = this.state.questionsArray.filter(q => q.difficulty === 'medium')
     let mediumF = medium.slice(0,5)
@@ -63,6 +64,7 @@ componentDidMount(){
       mediumQ: mediumF
     })
   }
+
   hardQ = () =>{
     let hard = this.state.questionsArray.filter(q => q.difficulty === 'hard')
     let hardF = hard.slice(0,5)
@@ -92,7 +94,6 @@ componentDidMount(){
         showBack: [...this.state.showBack, obj],
         currentQ: obj
       })
-
     }
   }
   
@@ -214,48 +215,36 @@ componentDidMount(){
   submitAnswer = (event) => {
     event.preventDefault()
     if (this.state.currentQ === null){
-      
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: "Choose a Question First"
       })
-
-      
-
     }else{
-
       if(this.state.userAnswer.length < 1){
-
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: "Please enter an answer"
         })
-
       }else{
-
         this.evalAnswer()
         this.setState({
           userAnswer: "",
           currentQ: null,
           needToAnswer: false
         })
-
       }
-
     }
   }
 
   componentDidUpdate = () => {
     if(this.state.questionsRemaining === 0){
-
       Swal.fire({
         icon: 'success',
         title: 'Game Completed',
         text: "Your Final Score is " + this.state.userScore + ".\n You will be logged out in 5 seconds"
       })
-
       fetch('http://localhost:3000/games',{
         method: 'POST',
         headers: {
@@ -266,29 +255,24 @@ componentDidMount(){
           highscore: this.state.userScore,
           user_id: this.state.user.id
         }
-          
         })
       })
       .then(response => response.json())
       .then(newGame => {
         console.log(newGame)
       })
-
       setTimeout(function(){
-
         window.location.reload()
-
       }, 5000)
     }
   }
  
   render(){
     let login = this.state.user
-    
       return (
         <BrowserRouter>
           <div style={{textAlign: "center", backgroundImage: "linear-gradient(to left bottom, #051937, #331a4c, #66004b, #900033, #a40101)", color: "white"}}>
-            
+
             {login === false ? <Redirect to="/" /> : (
               <Redirect to="/game" />
             )}
@@ -302,7 +286,7 @@ componentDidMount(){
                               className="container" 
                               style={{textAlign: "center"}}/>
             }} />
-            
+
             <Route exact path="/profile" render = {()=>{
               return <Profile
                       logout={this.logout}
@@ -311,7 +295,6 @@ componentDidMount(){
             }} />
 
             <Route exact path="/game" render={()=>{
-
               return <Game 
                   logout={this.logout}
                   score={this.state.userScore}
@@ -326,7 +309,6 @@ componentDidMount(){
                   medium={this.state.mediumQ}
                   hard={this.state.hardQ}/>
             }}/>
-
           </div>
         </BrowserRouter>
       );
