@@ -35,11 +35,11 @@ class CardBack extends React.Component{
                 <div className="card-body" style={{height: "100%"}}>
                     <h5 className="card-title">
                         {this.props.question.replace(/(&quot;|&#039;|&|acute;|amp;|;)/g, '')}
-                        <div style={{fontSize: "3vh", wordWrap: "break-word"}}>
+                        <div style={{fontSize: "3vh", height: "100%",flexWrap: "wrap"}}>
                             <br/>
                             {this.props.questionObj.type === "multiple" ? (
                                 this.state.options.map(answer => {
-                                    return <p key={answer}>{answer}</p>
+                                    return <p key={answer}>{answer.replace(/(&quot;|&#039;|&|acute;|amp;|;)/g, '')}</p>
                                 })
                             ): null }
                         </div>
