@@ -27,7 +27,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 25,
+      questionsRemaining: 15,
       audio: true
     }
     this.welcome = new Audio(welcome)
