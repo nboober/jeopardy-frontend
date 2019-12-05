@@ -23,7 +23,7 @@ class App extends React.Component {
       needToAnswer: false,
       userAnswer: "",
       userScore: 0,
-      questionsRemaining: 25,
+      questionsRemaining: 1,
       audio: true
     }
     this.welcome = new Audio(welcome)
@@ -224,9 +224,9 @@ componentDidMount(){
       alert("Choose a Question First")
     }else{
 
-      if(this.state.userAnswer.length <= 2){
+      if(this.state.userAnswer.length === 0){
 
-        alert("Your answer must be greater than 2 characters")
+        alert("Your answer must be atleast 1 character")
 
       }else{
 
