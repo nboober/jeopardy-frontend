@@ -10,13 +10,23 @@ class CardBack extends React.Component{
 
     componentDidMount = () => {
 
-        this.props.questionObj.incorrect_answers.push(this.props.questionObj.correct_answer)
+        this.combineIncAndCorr()
+     
+    }
+
+    combineIncAndCorr = () => {
+
+        let incorrect = this.props.questionObj.incorrect_answers
+
+        let rand = Math.floor(Math.random() * (incorrect.length) + 1)
+
+        this.props.questionObj.incorrect_answers.splice(rand, 0, this.props.questionObj.correct_answer)
 
         this.setState({
             options: this.props.questionObj.incorrect_answers
         })
-    }
 
+    }
 
     render(){
         // console.log(props)
