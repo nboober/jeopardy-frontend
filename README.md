@@ -3,6 +3,8 @@
 ## Introduction
 This is my FlatIron Mod 4 project. This project was our interpretation of the game Jeopardy.
 
+Trivia API used: https://opentdb.com/
+
 ## How To Play
  - Sign into game with either:
     - username: "nick" , password: "password"
