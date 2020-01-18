@@ -135,7 +135,7 @@ componentDidMount(){
 
   fetchUser = () => {
     let user_id = this.state.user.id;
-    fetch(`https://jeopardy-back.herokuapp.com/${user_id}`)
+    fetch(`https://jeopardy-back.herokuapp.com/users/${user_id}`)
     .then(response => response.json())
     .then(userObj => {
       this.setState({
