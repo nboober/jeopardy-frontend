@@ -106,7 +106,7 @@ componentDidMount(){
     event.preventDefault()
     let username = this.state.username
     let password = this.state.password.toString()
-    fetch("http://localhost:3000/login", {
+    fetch("https://jeopardy-back.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +135,7 @@ componentDidMount(){
 
   fetchUser = () => {
     let user_id = this.state.user.id;
-    fetch(`http://localhost:3000/users/${user_id}`)
+    fetch(`https://jeopardy-back.herokuapp.com/${user_id}`)
     .then(response => response.json())
     .then(userObj => {
       this.setState({
@@ -266,7 +266,7 @@ componentDidMount(){
         text: "Your Final Score is " + this.state.userScore + ".\n You will be logged out in 5 seconds"
       })
 
-      fetch('http://localhost:3000/games',{
+      fetch('https://jeopardy-back.herokuapp.com/games',{
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
