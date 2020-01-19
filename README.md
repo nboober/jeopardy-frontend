@@ -18,3 +18,7 @@ Trivia API used: https://opentdb.com/
     - The backend will need to be run before this repository in order for the game to work properly
  - npm install
  - npm start
+
+ ## Back-End
+
+ https://github.com/nboober/jeopardy-backend
