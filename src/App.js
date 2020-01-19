@@ -73,6 +73,12 @@ componentDidMount(){
   }
 
   playWelcome = () => {
+    Swal.fire({
+      title: "How To Login",
+      text: "Login with the following credentials: \n username: nick , password: password",
+      icon: "info",
+      button: "Ok"
+    });
     if (this.state.audio === true) {this.welcome.play()} 
   }
 
