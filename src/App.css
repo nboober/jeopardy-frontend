@@ -29,3 +29,7 @@
   font-family: 'Luckiest Guy', cursive;
   font-size: 80px;
 }
+
+.center{
+  margin: 0 auto;
+}

@@ -5,7 +5,7 @@ import CardBack from '../Components/CardBack';
 let Card = (props) => {
 
     return (
-        <div>
+        <div className="center">
             {props.cardSide.includes(props.question)?(
                  <CardBack question={props.question.question} questionObj={props.question}/>
                 ) : (
